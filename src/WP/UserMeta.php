@@ -1,9 +1,9 @@
 <?php
 
-namespace WeDevs\ORM\WP;
+namespace WpEloquent\WP;
 
 
-use WeDevs\ORM\Eloquent\Model;
+use WpEloquent\Eloquent\Model;
 
 class UserMeta extends Model
 {

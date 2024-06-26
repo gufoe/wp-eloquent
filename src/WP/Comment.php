@@ -1,9 +1,9 @@
 <?php
 
-namespace WeDevs\ORM\WP;
+namespace WpEloquent\WP;
 
 
-use WeDevs\ORM\Eloquent\Model;
+use WpEloquent\Eloquent\Model;
 
 class Comment extends Model
 {
@@ -16,6 +16,6 @@ class Comment extends Model
      */
     public function post()
     {
-        return $this->hasOne('WeDevs\ORM\WP\Post');
+        return $this->hasOne('WpEloquent\WP\Post');
     }
 }

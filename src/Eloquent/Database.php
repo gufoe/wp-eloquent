@@ -1,5 +1,6 @@
 <?php
-namespace WeDevs\ORM\Eloquent;
+
+namespace WpEloquent\Eloquent;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Grammars\Grammar;
@@ -30,7 +31,7 @@ class Database implements ConnectionInterface
     /**
      * Initializes the Database class
      *
-     * @return \WeDevs\ORM\Eloquent\Database
+     * @return \WpEloquent\Eloquent\Database
      */
     public static function instance()
     {
@@ -73,7 +74,7 @@ class Database implements ConnectionInterface
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function table($table)
+    public function table($table, $as = null)
     {
         $processor = $this->getPostProcessor();
 
@@ -96,17 +97,19 @@ class Database implements ConnectionInterface
         return new Expression($value);
     }
 
-	/**
-	 * Get a new query builder instance.
-	 *
-	 * @return \Illuminate\Database\Query\Builder
-	 */
-	public function query()
-	{
-		return new Builder(
-			$this, $this->getQueryGrammar(), $this->getPostProcessor()
-		);
-	}
+    /**
+     * Get a new query builder instance.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function query()
+    {
+        return new Builder(
+            $this,
+            $this->getQueryGrammar(),
+            $this->getPostProcessor()
+        );
+    }
 
     /**
      * Run a select statement and return a single result.
@@ -163,7 +166,6 @@ class Database implements ConnectionInterface
      */
     public function cursor($query, $bindings = [], $useReadPdo = true)
     {
-
     }
 
     /**
@@ -355,7 +357,7 @@ class Database implements ConnectionInterface
             $data = $callback();
             $this->commit();
             return $data;
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->rollBack();
             throw $e;
         }
@@ -441,7 +443,7 @@ class Database implements ConnectionInterface
     /**
      * Return self as PDO
      *
-     * @return \WeDevs\ORM\Eloquent\Database
+     * @return \WpEloquent\Eloquent\Database
      */
     public function getPdo()
     {
@@ -469,5 +471,11 @@ class Database implements ConnectionInterface
     public function getConfig($option = null)
     {
         return Arr::get($this->config, $option);
+    }
+
+
+    function getDatabaseName()
+    {
+        return \DB_NAME;
     }
 }

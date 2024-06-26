@@ -1,9 +1,9 @@
 <?php
 
-namespace WeDevs\ORM\Eloquent\Facades;
+namespace WpEloquent\Eloquent\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use WeDevs\ORM\Eloquent\Database;
+use WpEloquent\Eloquent\Database;
 
 /**
  * @see \Illuminate\Database\DatabaseManager
@@ -17,6 +17,10 @@ class DB extends Facade
      * @return string
      */
     protected static function getFacadeAccessor()
+    {
+        return Database::instance();
+    }
+    public static function getFacadeRoot()
     {
         return Database::instance();
     }
